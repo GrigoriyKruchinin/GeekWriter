@@ -13,7 +13,7 @@ test-coverage-tool
 htmlcov/
 
 # bootsrap tamplates
-bs5/
+bs/
 
 # vscode
 .vscode/
