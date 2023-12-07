@@ -12,7 +12,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class UsersListView(ListView):
-    pass
+    model = User
+    template_name = 'users/writers.html'
+    context_object_name = 'users'
 
 
 class RegisterUserView(SuccessMessageMixin, CreateView):
