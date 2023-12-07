@@ -15,7 +15,7 @@ class UsersListView(ListView):
     pass
 
 
-class RegisterUserView(CreateView, SuccessMessageMixin):
+class RegisterUserView(SuccessMessageMixin, CreateView):
     model = User
     form_class = CreateUserForm
     template_name = 'form.html'

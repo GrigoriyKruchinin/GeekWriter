@@ -9,7 +9,15 @@ class User(AbstractUser):
         ('reader', _('Reader')),
     )
 
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='reader')
+    first_name = models.CharField(_("first name"), max_length=50)
+    last_name = models.CharField(_("last name"), max_length=50)
+    email = models.EmailField(_("email address"), unique=True)
+    role = models.CharField(
+        max_length=10, 
+        choices=ROLE_CHOICES, 
+        default='reader',
+        verbose_name=_('Role'),
+    )
 
     def __str__(self):
         return self.get_full_name()
