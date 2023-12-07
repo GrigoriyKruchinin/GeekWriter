@@ -28,12 +28,16 @@
                 <div class="text-end">
                     {% if user.is_authenticated %}
                         <span class="text-white me-2">{{ user.username }}</span>
-                        <a href="{% url 'logout' %}" class="btn btn-outline-light me-2">{% trans "Logout" %}</a>
+                        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light me-2">{% trans "Logout" %}</button>
+                        </form>
                     {% else %}
                         <a href="/login/" class="btn btn-outline-light me-2">{% trans "Login" %}</a>
-                        <a href="/users/create/" class="btn btn-primary">{% trans "Registration" %}</a>
+                        <a href="/users/registration/" class="btn btn-primary">{% trans "Registration" %}</a>
                     {% endif %}
                 </div>
+                
             </div>
         </div>
     </header>
@@ -60,9 +64,9 @@
             </div>
     
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/hexlethq/"><img src="{% static 'img/instagram.png' %}" alt="inst" width="24" height="24"></a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="https://www.facebook.com/Hexlet"><img src="{% static 'img/facebook.png' %}" width="24" height="24"></a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="https://t.me/hexlet_ru"><img src="{% static 'img/telegram.png' %}" width="24" height="24"></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/eho_california/"><img src="{% static 'img/instagram.png' %}" alt="inst" width="24" height="24"></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="https://t.me/kga_93"><img src="{% static 'img/telegram.png' %}" width="24" height="24"></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="https://www.linkedin.com/in/grigoriy-kruchinin/"><img src="{% static 'img/linkedin.png' %}" width="24" height="24"></a></li>
             </ul>
         </footer>
     </div>
