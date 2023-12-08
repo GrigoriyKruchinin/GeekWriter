@@ -9,21 +9,24 @@
     <table class="table">
         <thead class="table-dark">
         <tr>
-            <th>{% trans "ID" %}</th>
             <th>{% trans "Username" %}</th>
             <th>{% trans "Full name" %}</th>
-            <th>{% trans "Creation date" %}</th>
+            <th>{% trans "Best work" %}</th>
+            <th>{% trans "Average score" %}</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
             {% for user in users %}
+            {% if user.role == "author" %}
             <tr>
-                <td>{{ user.id }}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.get_full_name }}</td>
-                <td>{{ user.date_joined }}</td>
+                <td></td>
+                <td></td>
+                <td><a href="{% url 'user_detail' pk=user.id %}">{% trans "Page" %}</a></td>
             </tr>
+            {% endif %}
             {% endfor %}
         </tbody>
     </table>

@@ -1,4 +1,3 @@
-import django.contrib.messages.views
 from django.views.generic import (
     ListView, CreateView, DetailView, UpdateView, DeleteView
 )
@@ -9,6 +8,8 @@ from .models import User
 
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+
+from geekwriter.mixins import CustomPermissionMixin, MyLoginRequiredMixin
 
 
 class UsersListView(ListView):
@@ -29,13 +30,24 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
     }
 
 
-
 class UserDetailView(DetailView):
-    pass
+    model = User
+    template_name = 'users/user_detail.html'
 
 
-class UserUpdateView(UpdateView):
-    pass
+class UserUpdateView(
+    MyLoginRequiredMixin, CustomPermissionMixin,
+    SuccessMessageMixin, UpdateView
+):
+    model = User
+    form_class = UpdateUserForm
+    template_name = 'form.html'
+    success_message = _("You have been successfully updated your information")
+    success_url = reverse_lazy('home')
+    extra_context = {
+        'header': _("Update own information"),
+        'button_text': _("Update")
+    }
 
 
 class UserDeleteView(DeleteView):

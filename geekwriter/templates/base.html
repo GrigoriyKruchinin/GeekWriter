@@ -27,7 +27,10 @@
         
                 <div class="text-end">
                     {% if user.is_authenticated %}
-                        <span class="text-white me-2">{{ user.username }}</span>
+                        <td>
+                            <span class="text-white me-2">{{ user.username }}</span>
+                            <a href="{% url 'user_update' pk=user.id %}" class="btn btn-outline-light me-2">{% trans "Update" %}</a>
+                        </td>
                         <form method="post" action="{% url 'logout' %}" style="display: inline;">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-light me-2">{% trans "Logout" %}</button>

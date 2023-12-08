@@ -12,7 +12,7 @@ version:
 
 # Запуск приложения в product среде
 start:
-	gunicorn task_manager.wsgi:application
+	gunicorn geekwriter.wsgi:application
 
 # Запуск приложения в среде разработки
 dev:
@@ -57,7 +57,7 @@ loc_comp:
 	python manage.py compilemessages
 
 lint:
-	poetry run flake8 task_manager
+	poetry run flake8 geekwriter
 
 test:
 	poetry run python3 manage.py test

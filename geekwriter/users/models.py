@@ -13,8 +13,8 @@ class User(AbstractUser):
     last_name = models.CharField(_("last name"), max_length=50)
     email = models.EmailField(_("email address"), unique=True)
     role = models.CharField(
-        max_length=10, 
-        choices=ROLE_CHOICES, 
+        max_length=10,
+        choices=ROLE_CHOICES,
         default='reader',
         verbose_name=_('Role'),
     )
