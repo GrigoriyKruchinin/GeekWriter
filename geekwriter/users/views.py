@@ -9,7 +9,9 @@ from .models import User
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
-from geekwriter.mixins import CustomPermissionMixin, MyLoginRequiredMixin
+from geekwriter.mixins import (
+    CustomPermissionMixin, MyLoginRequiredMixin, StringRepresentationMixin
+)
 
 
 class UsersListView(ListView):
@@ -44,11 +46,25 @@ class UserUpdateView(
     template_name = 'form.html'
     success_message = _("You have been successfully updated your information")
     success_url = reverse_lazy('home')
+    error_message = _("You don't have permissions to modify another user.")
     extra_context = {
         'header': _("Update own information"),
         'button_text': _("Update")
     }
 
 
-class UserDeleteView(DeleteView):
-    pass
+class UserDeleteView(
+    MyLoginRequiredMixin, 
+    CustomPermissionMixin, 
+    StringRepresentationMixin,
+    SuccessMessageMixin, 
+    DeleteView):
+    model = User
+    template_name = 'delete_form.html'
+    success_message = _("User successfully deleted")
+    success_url = reverse_lazy('home')
+    error_message = _("You don't have permissions to delete another user.")
+    extra_context = {
+        'header': _("Delete user"),
+        'button_text': _("Delete")
+    }

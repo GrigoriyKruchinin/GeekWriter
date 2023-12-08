@@ -5,16 +5,6 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 
-class CustomPermissionMixin:
-    def dispatch(self, request, *args, **kwargs):
-        if self.get_object().id != request.user.id:
-            messages.error(
-                request, _("You don't have permission to modify another user.")
-            )
-            return redirect(reverse_lazy('home'))
-        return super().dispatch(request, *args, **kwargs)
-
-
 class MyLoginRequiredMixin(LoginRequiredMixin):
     login_url = reverse_lazy('login')
 
@@ -23,3 +13,21 @@ class MyLoginRequiredMixin(LoginRequiredMixin):
             messages.error(request, _("You are not logged in! Please log in!"))
             return redirect(self.login_url)
         return super().dispatch(request, *args, **kwargs)
+
+
+class CustomPermissionMixin:
+    error_message = None
+    def dispatch(self, request, *args, **kwargs):
+        if self.get_object().id != request.user.id:
+            messages.error(
+                request, self.error_message
+            )
+            return redirect(reverse_lazy('home'))
+        return super().dispatch(request, *args, **kwargs)
+
+
+class StringRepresentationMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = str(self.get_object())
+        return context
