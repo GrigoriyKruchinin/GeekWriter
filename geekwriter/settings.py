@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'geekwriter',
     'geekwriter.users',
+    'geekwriter.books',
     'django_bootstrap5',
     'django_filters',
 ]
@@ -156,7 +157,10 @@ LOCALE_PATHS = [BASE_DIR / 'locale']
 STATIC_URL = '/static/'
 
 # Paths where Django will look for static files
-STATICFILES_DIRS = [BASE_DIR / "geekwriter" / "static"]
+STATICFILES_DIRS = [
+    BASE_DIR / "geekwriter" / "static",
+    BASE_DIR / "geekwriter" / "books" / "books"
+]
 
 # Path where static files will be collected during development
 STATIC_ROOT = BASE_DIR / "static_root" / "dev"

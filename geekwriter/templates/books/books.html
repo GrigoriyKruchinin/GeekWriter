@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="d-flex justify-content-left my-4">
+    <a class="btn btn-primary btn-sm" href="{% url 'book_create' %}" role="button">{% translate "Create book" %}</a>
+</div>
+<div class="container mt-4">
+    <h2 class="mb-4">{% trans "Books" %}</h2>
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "Author" %}</th>
+            <th>{% trans "Description" %}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.description }}</td>
+                <td><a href="{% url 'book_detail' pk=book.id %}">{% trans "Book's page" %}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock content %}
